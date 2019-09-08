@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net451</TargetFrameworks>
+    <Description>Minimal implementation of TV Maze API</Description>
+    <Authors>Peyman Mohammadi</Authors>
+    <Copyright>© 2019 Peyman Mohammadi</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/peymanr34/tv-maze</RepositoryUrl>
+    <PackageReleaseNotes>alpha.1</PackageReleaseNotes>
+    <PackageTags>movie, series, api, wrapper, tvmaze</PackageTags>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Version>1.0.0-alpha.1</Version>
+    <InformationalVersion>This is a prerelease package</InformationalVersion>
+  </PropertyGroup>
+
+  <!-- Conditionally obtain references for the .NET Framework 4.5.1 target -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+</Project>

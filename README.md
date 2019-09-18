@@ -1,8 +1,8 @@
 ﻿[![Nuget Version](https://img.shields.io/nuget/v/MovieCollection.TVMaze.svg?style=flat)](https://www.nuget.org/packages/MovieCollection.TVMaze)
 [![License](https://img.shields.io/github/license/peymanr34/tv-maze.svg?style=flat)](LICENSE)
 
-# TV Maze API
-Minimal implementation of TV Maze API
+# TVMaze API ![UNOFFICIAL](https://img.shields.io/badge/UNOFFICIAL-red)
+Minimal implementation of TVMaze API
 
 ## Target frameworks
 - .Net Standard 2.0
@@ -55,10 +55,10 @@ You can checkout `Demo` project for more samples.
 - First alpha release.
 
 ## Acknowledgments
-Special thanks to [TV Maze](https://www.tvmaze.com) for providing free API services.
+Special thanks to [TVMaze](https://www.tvmaze.com) for providing free API services.
 
-## TV Maze API License
-Please read TV Maze API license [here](https://www.tvmaze.com/api).
+## TVMaze API License
+Please read TVMaze API license [here](https://www.tvmaze.com/api).
 
 ## License
 This project is licensed under the [MIT License](LICENSE).

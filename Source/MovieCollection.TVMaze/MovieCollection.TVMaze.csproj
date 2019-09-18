@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net451</TargetFrameworks>
-    <Description>Minimal implementation of TV Maze API</Description>
+    <Description>Minimal implementation of TVMaze API</Description>
     <Authors>Peyman Mohammadi</Authors>
     <Copyright>© 2019 Peyman Mohammadi</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

@@ -7,11 +7,11 @@
     <Copyright>© 2019 Peyman Mohammadi</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/peymanr34/tv-maze</RepositoryUrl>
-    <PackageReleaseNotes>alpha.1</PackageReleaseNotes>
+    <PackageReleaseNotes>alpha.2</PackageReleaseNotes>
     <PackageTags>movie, series, api, wrapper, tvmaze</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>1.0.0-alpha.1</Version>
+    <Version>1.0.0-alpha.2</Version>
     <InformationalVersion>This is a prerelease package</InformationalVersion>
   </PropertyGroup>
 

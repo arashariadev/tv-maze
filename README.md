@@ -1,4 +1,5 @@
 ﻿[![Nuget Version](https://img.shields.io/nuget/v/MovieCollection.TVMaze.svg?style=flat)](https://www.nuget.org/packages/MovieCollection.TVMaze)
+[![Nuget Downloads](https://img.shields.io/nuget/dt/MovieCollection.TVMaze?color=red)](https://www.nuget.org/packages/MovieCollection.TVMaze)
 [![License](https://img.shields.io/github/license/peymanr34/tv-maze.svg?style=flat)](LICENSE)
 
 # TVMaze API ![UNOFFICIAL](https://img.shields.io/badge/UNOFFICIAL-red)
@@ -51,6 +52,9 @@ Summary: <p>Suzy Klein introduces America's most talented young musicians in an 
 You can checkout `Demo` project for more samples.
 
 ## Change log
+**v1.0.0-alpha.2**
+- Add `CultureInfo.InvariantCulture` to dates.
+
 **v1.0.0-alpha.1**
 - First alpha release.
 

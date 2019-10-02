@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -66,9 +67,9 @@ namespace MovieCollection.TVMaze
             return await Helpers.DownloadJsonAsync(url);
         }
 
-        public List<UrlParameter> GetEmbeddedPrameters(string[] embed)
+        private static List<UrlParameter> GetEmbeddedPrameters(string[] embed)
         {
-            if (embed == null)
+            if (embed is null)
             {
                 throw new ArgumentNullException(nameof(embed));
             }
@@ -178,7 +179,7 @@ namespace MovieCollection.TVMaze
 
             if (date.HasValue)
             {
-                parameters.Add(new UrlParameter("date", date.Value.ToString("yyyy-MM-dd")));
+                parameters.Add(new UrlParameter("date", date.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)));
             }
 
             if (!string.IsNullOrEmpty(country))
@@ -264,7 +265,7 @@ namespace MovieCollection.TVMaze
         {
             var parameters = new List<UrlParameter>()
             {
-                new UrlParameter("date", date.ToString("yyyy-MM-dd"))
+                new UrlParameter("date", date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
             };
 
             string json = await GetJsonAsync($"/shows/{showId}/episodesbydate", parameters);

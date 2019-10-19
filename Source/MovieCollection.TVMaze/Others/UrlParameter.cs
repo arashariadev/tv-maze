@@ -12,6 +12,11 @@
         public UrlParameter(string key, object value)
             : base()
         {
+            if (value is null)
+            {
+                throw new System.ArgumentNullException(nameof(value));
+            }
+
             Key = key;
             Value = value.ToString();
         }

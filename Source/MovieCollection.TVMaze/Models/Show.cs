@@ -23,7 +23,7 @@ namespace MovieCollection.TVMaze.Models
         public string Language { get; set; }
 
         [JsonProperty("genres")]
-        public string[] Genres { get; set; }
+        public IEnumerable<string> Genres { get; set; }
 
         [JsonProperty("status")]
         public string Status { get; set; }

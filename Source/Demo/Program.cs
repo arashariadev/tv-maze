@@ -1,10 +1,15 @@
-﻿using MovieCollection.TVMaze;
-using System;
+﻿using System;
+using System.Net.Http;
+using MovieCollection.TVMaze;
 
 namespace Demo
 {
     class Program
     {
+        // HttpClient is intended to be instantiated once per application, rather than per-use.
+        // See https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient
+        private static readonly HttpClient _httpClient = new HttpClient();
+
         private static Configuration _configuration;
         private static Service _service;
 
@@ -12,11 +17,11 @@ namespace Demo
         {
             // Initialize [API Key is optional]
             _configuration = new Configuration();
-            _service = new Service(_configuration);
+            _service = new Service(_httpClient, _configuration);
 
-        Start:
+Start:
             Console.Clear();
-            Console.WriteLine("Welcome to The Movie Database demo.\n");
+            Console.WriteLine("Welcome to TVMaze demo.\n");
 
             string[] items = new string[]
             {

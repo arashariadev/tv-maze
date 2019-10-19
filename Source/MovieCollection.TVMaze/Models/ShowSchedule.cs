@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace MovieCollection.TVMaze.Models
 {
@@ -8,6 +9,6 @@ namespace MovieCollection.TVMaze.Models
         public string Time { get; set; }
 
         [JsonProperty("days")]
-        public string[] Days { get; set; }
+        public IEnumerable<string> Days { get; set; }
     }
 }

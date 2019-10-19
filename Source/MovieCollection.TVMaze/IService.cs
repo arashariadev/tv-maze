@@ -13,12 +13,12 @@ namespace MovieCollection.TVMaze
         Task<Show> SearchByTVDbIdAsync(string tvdbId);
         Task<Show> SearchByTVRageIdAsync(string tvRageId);
         Task<IList<SearchPerson>> SearchPeopleAsync(string query);
-        Task<IList<Schedule>> GetScheduleAsync(DateTime? date = null, string country = null);
+        Task<IList<Schedule>> GetScheduleAsync(DateTime? dateTime = null, string country = null);
         Task<IList<Schedule>> GetFullScheduleAsync();
         Task<Show> GetShowInfoAsync(int id, params string[] embed);
         Task<IList<Episode>> GetShowEpisodesListAsync(int showId, bool specials = false);
         Task<Episode> GetShowEpisodeAsync(int showId, int season, int episode);
-        Task<IList<Episode>> GetShowEpisodesByDateAsync(int showId, DateTime date);
+        Task<IList<Episode>> GetShowEpisodesByDateAsync(int showId, DateTime dateTime);
         Task<IList<Season>> GetShowSeasonsAsync(int showId);
         Task<IList<Episode>> GetSeasonEpisodesAsync(int seasonId);
         Task<IList<Cast>> GetShowCastAsync(int showId);

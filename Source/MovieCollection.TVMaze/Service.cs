@@ -1,42 +1,34 @@
-﻿using MovieCollection.TVMaze.Models;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using MovieCollection.TVMaze.Models;
+using Newtonsoft.Json;
 
 namespace MovieCollection.TVMaze
 {
     public class Service : IService
     {
+        private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
 
-        public Service()
+        public Service(HttpClient httpClient)
+            : base()
         {
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _configuration = new Configuration();
         }
 
-        public Service(IConfiguration configuration)
+        public Service(HttpClient httpClient, IConfiguration configuration)
             : base()
         {
-            _configuration = configuration;
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
-        private IList<UrlParameter> GetConfigParameters()
-        {
-            List<UrlParameter> parameters = new List<UrlParameter>();
-
-            if (!string.IsNullOrWhiteSpace(_configuration.APIKey))
-            {
-                parameters.Add(new UrlParameter("apikey", _configuration.APIKey));
-            }
-
-            return parameters;
-        }
-
-        private string GetParametersString(IEnumerable<UrlParameter> parameters)
+        private static string GetParametersString(IEnumerable<UrlParameter> parameters)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -48,23 +40,33 @@ namespace MovieCollection.TVMaze
             return builder.ToString();
         }
 
-        private async Task<string> GetJsonAsync(string requestUrl, IEnumerable<UrlParameter> parameters = null)
+        private async Task<string> GetJsonAsync(string requestUrl, IEnumerable<UrlParameter> requestParameters = null)
         {
             string url = _configuration.BaseAddress + requestUrl;
 
-            var configParms = GetConfigParameters();
+            var parameters = new List<UrlParameter>();
 
-            if (parameters == null)
+            // Add api key if defined to list
+            if (!string.IsNullOrWhiteSpace(_configuration.APIKey))
             {
-                url += GetParametersString(configParms);
-            }
-            else
-            {
-                var union = parameters.Union(configParms);
-                url += GetParametersString(union);
+                parameters.Add(new UrlParameter("apikey", _configuration.APIKey));
             }
 
-            return await Helpers.DownloadJsonAsync(url);
+            // Add request specific parameters to list
+            if (requestParameters != null)
+            {
+                parameters.AddRange(requestParameters);
+            }
+
+            // Concat parameters to URL
+            url += GetParametersString(parameters);
+
+            using (var response = await _httpClient.GetAsync(new Uri(url)))
+            {
+                // TODO: Maybe handle API Rate limit (429)?
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
         }
 
         private static List<UrlParameter> GetEmbeddedPrameters(string[] embed)

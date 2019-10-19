@@ -23,10 +23,18 @@ Install-Package MovieCollection.TVMaze -PreRelease
 ```
 
 ## Get Today's Schedule
+1. Define an application wide `HttpClient` if you haven't already.
 
 ```csharp
+// HttpClient is intended to be instantiated once per application, rather than per-use.
+// See https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient
+private static readonly HttpClient httpClient = new HttpClient();
+```
+
+2. Initialize TVMaze `Service`:
+```csharp
 // Initialize
-var service = new MovieCollection.TVMaze.Service();
+var service = new MovieCollection.TVMaze.Service(httpClient);
 var results = await service.GetSchedule(country: "GB");
 
 foreach (var item in results)
@@ -52,6 +60,9 @@ Summary: <p>Suzy Klein introduces America's most talented young musicians in an 
 You can checkout `Demo` project for more samples.
 
 ## Change log
+**v1.0.0-alpha.2**
+- Replace `HttpWebRequest` with `HttpClient`.
+
 **v1.0.0-alpha.2**
 - Add `CultureInfo.InvariantCulture` to dates.
 

@@ -5,7 +5,7 @@ using MovieCollection.TVMaze.Models;
 
 namespace MovieCollection.TVMaze
 {
-    public interface IService
+    public interface ITVMazeService
     {
         Task<IList<Search>> SearchShowsAsync(string query);
         Task<Show> SearchSingleShowAsync(string query, params string[] embed);

@@ -10,14 +10,14 @@ namespace Demo
         // See https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient
         private static readonly HttpClient _httpClient = new HttpClient();
 
-        private static Configuration _configuration;
-        private static Service _service;
+        private static TVMazeConfiguration _configuration;
+        private static TVMazeService _service;
 
         private static void Main()
         {
             // Initialize [API Key is optional]
-            _configuration = new Configuration();
-            _service = new Service(_httpClient, _configuration);
+            _configuration = new TVMazeConfiguration();
+            _service = new TVMazeService(_httpClient, _configuration);
 
 Start:
             Console.Clear();

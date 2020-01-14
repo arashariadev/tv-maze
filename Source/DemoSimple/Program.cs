@@ -20,7 +20,7 @@ namespace DemoSimple
 
         private static async void SearchShow()
         {
-            var service = new MovieCollection.TVMaze.Service(_httpClient);
+            var service = new MovieCollection.TVMaze.TVMazeService(_httpClient);
             var results = await service.SearchShowsAsync("marvel");
 
             foreach (var item in results)
@@ -35,7 +35,7 @@ namespace DemoSimple
 
         private static async void GetSchedule()
         {
-            var service = new MovieCollection.TVMaze.Service(_httpClient);
+            var service = new MovieCollection.TVMaze.TVMazeService(_httpClient);
             var results = await service.GetScheduleAsync(country: "GB");
 
             foreach (var item in results)
@@ -51,7 +51,7 @@ namespace DemoSimple
 
         private static async void GetShowEpisode()
         {
-            var service = new MovieCollection.TVMaze.Service(_httpClient);
+            var service = new MovieCollection.TVMaze.TVMazeService(_httpClient);
             var item = await service.GetShowEpisodeAsync(16149, 2, 3);
 
             Console.WriteLine("Id: {0}", item.Id);

@@ -9,19 +9,19 @@ using Newtonsoft.Json;
 
 namespace MovieCollection.TVMaze
 {
-    public class Service : IService
+    public class TVMazeService : ITVMazeService
     {
         private readonly HttpClient _httpClient;
-        private readonly IConfiguration _configuration;
+        private readonly ITVMazeConfiguration _configuration;
 
-        public Service(HttpClient httpClient)
+        public TVMazeService(HttpClient httpClient)
             : base()
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            _configuration = new Configuration();
+            _configuration = new TVMazeConfiguration();
         }
 
-        public Service(HttpClient httpClient, IConfiguration configuration)
+        public TVMazeService(HttpClient httpClient, ITVMazeConfiguration configuration)
             : base()
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
@@ -30,9 +30,9 @@ namespace MovieCollection.TVMaze
 
         private static string GetParametersString(IEnumerable<UrlParameter> parameters)
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
-            foreach (UrlParameter item in parameters)
+            foreach (var item in parameters)
             {
                 builder.Append(builder.Length == 0 ? "?" : "&");
                 builder.Append(item.ToString());
@@ -169,19 +169,19 @@ namespace MovieCollection.TVMaze
         /// Episodes are returned in the order in which they are aired, and full information about the episode and the corresponding show is included.
         /// Note that contrary to what you might expect, the ISO country code for the United Kingdom is not UK, but GB.
         /// </summary>
-        /// <param name="date">Defaults to the current day.</param>
+        /// <param name="dateTime">Defaults to the current day.</param>
         /// <param name="country">Defaults to US</param>
         /// <returns></returns>
-        public async Task<IList<Schedule>> GetScheduleAsync(DateTime? date = null, string country = null)
+        public async Task<IList<Schedule>> GetScheduleAsync(DateTime? dateTime = null, string country = null)
         {
             // Date is an ISO 8601 formatted date; defaults to the current day.
             // CountryCode is an ISO 3166-1 code of the country; defaults to US 
 
             var parameters = new List<UrlParameter>();
 
-            if (date.HasValue)
+            if (dateTime.HasValue)
             {
-                parameters.Add(new UrlParameter("date", date.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)));
+                parameters.Add(new UrlParameter("date", dateTime.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)));
             }
 
             if (!string.IsNullOrEmpty(country))
@@ -263,11 +263,11 @@ namespace MovieCollection.TVMaze
         ///  This either returns an array of full episode info, or a HTTP 404.
         ///  Useful for daily (talk) shows that don't adhere to a common season numbering. 
         /// </summary>
-        public async Task<IList<Episode>> GetShowEpisodesByDateAsync(int showId, DateTime date)
+        public async Task<IList<Episode>> GetShowEpisodesByDateAsync(int showId, DateTime dateTime)
         {
             var parameters = new List<UrlParameter>()
             {
-                new UrlParameter("date", date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
+                new UrlParameter("date", dateTime.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
             };
 
             string json = await GetJsonAsync($"/shows/{showId}/episodesbydate", parameters);

@@ -60,14 +60,7 @@ Summary: <p>Suzy Klein introduces America's most talented young musicians in an 
 You can checkout `Demo` project for more samples.
 
 ## Change log
-**v1.0.0-alpha.2**
-- Replace `HttpWebRequest` with `HttpClient`.
-
-**v1.0.0-alpha.2**
-- Add `CultureInfo.InvariantCulture` to dates.
-
-**v1.0.0-alpha.1**
-- First alpha release.
+Please visit releases page.
 
 ## Acknowledgments
 Special thanks to [TVMaze](https://www.tvmaze.com) for providing free API services.

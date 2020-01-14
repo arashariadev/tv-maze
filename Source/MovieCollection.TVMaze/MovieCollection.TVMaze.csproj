@@ -8,11 +8,11 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/peymanr34/tv-maze</RepositoryUrl>
     <PackageProjectUrl>https://github.com/peymanr34/tv-maze</PackageProjectUrl>
-    <PackageReleaseNotes>alpha.3</PackageReleaseNotes>
+    <PackageReleaseNotes>alpha.4</PackageReleaseNotes>
     <PackageTags>movie, series, api, wrapper, tvmaze</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>1.0.0-alpha.3</Version>
+    <Version>1.0.0-alpha.4</Version>
     <InformationalVersion>This is a prerelease package</InformationalVersion>
   </PropertyGroup>
 

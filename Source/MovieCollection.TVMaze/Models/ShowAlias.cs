@@ -2,7 +2,7 @@
 
 namespace MovieCollection.TVMaze.Models
 {
-    public class Alias
+    public class ShowAlias
     {
         [JsonProperty("name")]
         public string Name { get; set; }

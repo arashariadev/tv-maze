@@ -23,7 +23,7 @@ namespace MovieCollection.TVMaze
         Task<IList<Episode>> GetSeasonEpisodesAsync(int seasonId);
         Task<IList<Cast>> GetShowCastAsync(int showId);
         Task<IList<Crew>> GetShowCrewAsync(int showId);
-        Task<IList<Alias>> GetShowAliasesAsync(int showId);
+        Task<IList<ShowAlias>> GetShowAliasesAsync(int showId);
         Task<IList<Show>> GetShowIndexAsync(int page = 1);
         Task<Episode> GetEpisodeByIdAsync(int episodeId, params string[] embed);
         Task<Person> GetPersonInfoAsync(int personId, params string[] embed);

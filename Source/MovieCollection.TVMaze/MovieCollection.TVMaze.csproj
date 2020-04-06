@@ -2,18 +2,23 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net451</TargetFrameworks>
-    <Description>Minimal implementation of TVMaze API</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <IncludeSymbols>true</IncludeSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>1.0.0-alpha.5</Version>
     <Authors>Peyman Mohammadi</Authors>
-    <Copyright>© 2019 Peyman Mohammadi</Copyright>
+    <PackageId>MovieCollection.TVMaze</PackageId>
+    <Copyright>© 2019 - 2020 Peyman Mohammadi</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>movie; series; api; wrapper; tvmaze</PackageTags>
+    <Description>Minimal implementation of TVMaze API</Description>
     <RepositoryUrl>https://github.com/peymanr34/tv-maze</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/peymanr34/tv-maze</PackageProjectUrl>
-    <PackageReleaseNotes>alpha.4</PackageReleaseNotes>
-    <PackageTags>movie, series, api, wrapper, tvmaze</PackageTags>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>1.0.0-alpha.4</Version>
-    <InformationalVersion>This is a prerelease package</InformationalVersion>
+    <PackageProjectUrl>https://github.com/peymanr34/tv-maze</PackageProjectUrl>
   </PropertyGroup>
 
   <!-- Conditionally obtain references for the .NET Framework 4.5.1 target -->

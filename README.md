@@ -1,13 +1,13 @@
-﻿[![Nuget Version](https://img.shields.io/nuget/v/MovieCollection.TVMaze.svg?style=flat)](https://www.nuget.org/packages/MovieCollection.TVMaze)
-[![Nuget Downloads](https://img.shields.io/nuget/dt/MovieCollection.TVMaze?color=red)](https://www.nuget.org/packages/MovieCollection.TVMaze)
-[![License](https://img.shields.io/github/license/peymanr34/tv-maze.svg?style=flat)](LICENSE)
+﻿[![Nuget Version][nuget-ver-badge]][nuget]
+[![Nuget Downloads][nuget-dl-badge]][nuget]
+[![License][license-badge]](LICENSE)
 
-# TVMaze API ![UNOFFICIAL](https://img.shields.io/badge/UNOFFICIAL-red)
-Minimal implementation of TVMaze API
+# TVMaze API ![UNOFFICIAL][unofficial-badge]
+Unofficial implementation of TVMaze API.
 
 ## Target frameworks
-- .Net Standard 2.0
-- .Net Framework 4.5.1
+- .NET Standard 2.0
+- .NET Framework 4.5.1
 
 ## Dependencies
 - [Newtonsoft.Json](https://www.newtonsoft.com/json) > 12.0.2
@@ -18,7 +18,7 @@ Minimal implementation of TVMaze API
 
 ## Installing
 Enter following command in your ```NuGet Package Manager```:
-```
+```powershell
 Install-Package MovieCollection.TVMaze -PreRelease
 ```
 
@@ -31,11 +31,11 @@ Install-Package MovieCollection.TVMaze -PreRelease
 private static readonly HttpClient httpClient = new HttpClient();
 ```
 
-2. Initialize TVMaze `Service`:
+2. Initialize `TVMazeService`:
 ```csharp
 // Initialize
-var service = new MovieCollection.TVMaze.Service(httpClient);
-var results = await service.GetSchedule(country: "GB");
+var service = new MovieCollection.TVMaze.TVMazeService(httpClient);
+var results = await service.GetScheduleAsync(country: "GB");
 
 foreach (var item in results)
 {
@@ -70,3 +70,9 @@ Please read TVMaze API license [here](https://www.tvmaze.com/api).
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
+
+[nuget]: https://www.nuget.org/packages/MovieCollection.TVMaze
+[nuget-ver-badge]: https://img.shields.io/nuget/v/MovieCollection.TVMaze.svg?style=flat
+[nuget-dl-badge]: https://img.shields.io/nuget/dt/MovieCollection.TVMaze?color=red
+[unofficial-badge]: https://img.shields.io/badge/UNOFFICIAL-red
+[license-badge]: https://img.shields.io/github/license/peymanr34/tv-maze.svg?style=flat

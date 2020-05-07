@@ -6,6 +6,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <IncludeSymbols>true</IncludeSymbols>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -15,7 +16,7 @@
     <Copyright>© 2019 - 2020 Peyman Mohammadi</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>movie; series; api; wrapper; tvmaze</PackageTags>
-    <Description>Minimal implementation of TVMaze API</Description>
+    <Description>Unofficial implementation of TVMaze API</Description>
     <RepositoryUrl>https://github.com/peymanr34/tv-maze</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/peymanr34/tv-maze</PackageProjectUrl>

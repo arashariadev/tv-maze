@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using MovieCollection.TVMaze;
 
 namespace Demo
 {
-    class Program
+    internal class Program
     {
         // HttpClient is intended to be instantiated once per application, rather than per-use.
         // See https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient
@@ -13,7 +14,7 @@ namespace Demo
         private static TVMazeConfiguration _configuration;
         private static TVMazeService _service;
 
-        private static void Main()
+        private static async Task Main()
         {
             // Initialize [API Key is optional]
             _configuration = new TVMazeConfiguration();
@@ -61,64 +62,64 @@ Start:
             {
                 default:
                 case 1:
-                    SearchShows();
+                    await SearchShows();
                     break;
                 case 2:
-                    SearchSingleShow();
+                    await SearchSingleShow();
                     break;
                 case 3:
-                    SearchByIMDbId();
+                    await SearchByIMDbId();
                     break;
                 case 4:
-                    SearchByTVDbId();
+                    await SearchByTVDbId();
                     break;
                 case 5:
-                    SearchByTVRageId();
+                    await SearchByTVRageId();
                     break;
                 case 6:
-                    SearchPeople();
+                    await SearchPeople();
                     break;
                 case 7:
-                    GetSchedule();
+                    await GetSchedule();
                     break;
                 case 8:
-                    GetShowInfo();
+                    await GetShowInfo();
                     break;
                 case 9:
-                    GetShowEpisodes();
+                    await GetShowEpisodes();
                     break;
                 case 10:
-                    GetShowEpisode();
+                    await GetShowEpisode();
                     break;
                 case 11:
-                    GetShowEpisodesByDate();
+                    await GetShowEpisodesByDate();
                     break;
                 case 12:
-                    GetShowSeasons();
+                    await GetShowSeasons();
                     break;
                 case 13:
-                    GetSeasonEpisodes();
+                    await GetSeasonEpisodes();
                     break;
                 case 14:
-                    GetShowCast();
+                    await GetShowCast();
                     break;
                 case 15:
-                    GetShowCrew();
+                    await GetShowCrew();
                     break;
                 case 16:
-                    GetShowAliases();
+                    await GetShowAliases();
                     break;
                 case 17:
-                    GetEpisodeInfo();
+                    await GetEpisodeInfo();
                     break;
                 case 18:
-                    GetPersonInfo();
+                    await GetPersonInfo();
                     break;
                 case 19:
-                    GetCastCredits();
+                    await GetCastCredits();
                     break;
                 case 20:
-                    GetCrewCredits();
+                    await GetCrewCredits();
                     break;
             }
 
@@ -129,7 +130,7 @@ Start:
             goto Start;
         }
 
-        private static async void SearchShows()
+        private static async Task SearchShows()
         {
             var results = await _service.SearchShowsAsync("marvel");
 
@@ -143,7 +144,7 @@ Start:
             }
         }
 
-        private static async void SearchSingleShow()
+        private static async Task SearchSingleShow()
         {
             var item = await _service.SearchSingleShowAsync("frasier");
 
@@ -153,7 +154,7 @@ Start:
             Console.WriteLine("Summary: {0}", item.Summary);
         }
 
-        private static async void SearchByIMDbId()
+        private static async Task SearchByIMDbId()
         {
             var item = await _service.SearchByIMDbIdAsync("tt0098904");
 
@@ -163,7 +164,7 @@ Start:
             Console.WriteLine("Summary: {0}", item.Summary);
         }
 
-        private static async void SearchByTVDbId()
+        private static async Task SearchByTVDbId()
         {
             var item = await _service.SearchByTVDbIdAsync("81189");
 
@@ -173,7 +174,7 @@ Start:
             Console.WriteLine("Summary: {0}", item.Summary);
         }
 
-        private static async void SearchByTVRageId()
+        private static async Task SearchByTVRageId()
         {
             var item = await _service.SearchByTVRageIdAsync("24493");
 
@@ -183,7 +184,7 @@ Start:
             Console.WriteLine("Summary: {0}", item.Summary);
         }
 
-        private static async void SearchPeople()
+        private static async Task SearchPeople()
         {
             var results = await _service.SearchPeopleAsync("cate");
 
@@ -197,7 +198,7 @@ Start:
             }
         }
 
-        private static async void GetSchedule()
+        private static async Task GetSchedule()
         {
             // Common mistake: if you want UK's schedule pass "GB" as country.
             var results = await _service.GetScheduleAsync(country: "US");
@@ -213,7 +214,7 @@ Start:
             }
         }
 
-        private static async void GetShowInfo()
+        private static async Task GetShowInfo()
         {
             var item = await _service.GetShowInfoAsync(2);
 
@@ -223,7 +224,7 @@ Start:
             Console.WriteLine("Summary: {0}", item.Summary);
         }
 
-        private static async void GetShowEpisodes()
+        private static async Task GetShowEpisodes()
         {
             var results = await _service.GetShowEpisodesListAsync(16149);
 
@@ -236,7 +237,7 @@ Start:
             }
         }
 
-        private static async void GetShowEpisode()
+        private static async Task GetShowEpisode()
         {
             var item = await _service.GetShowEpisodeAsync(16149, 2, 3);
 
@@ -246,7 +247,7 @@ Start:
             Console.WriteLine("******************************");
         }
 
-        private static async void GetShowEpisodesByDate()
+        private static async Task GetShowEpisodesByDate()
         {
             var results = await _service.GetShowEpisodesByDateAsync(17078, new DateTime(2019, 04, 12));
 
@@ -259,7 +260,7 @@ Start:
             }
         }
 
-        private static async void GetShowSeasons()
+        private static async Task GetShowSeasons()
         {
             var results = await _service.GetShowSeasonsAsync(17078);
 
@@ -273,7 +274,7 @@ Start:
             }
         }
 
-        private static async void GetSeasonEpisodes()
+        private static async Task GetSeasonEpisodes()
         {
             var results = await _service.GetSeasonEpisodesAsync(82424);
 
@@ -287,7 +288,7 @@ Start:
             }
         }
 
-        private static async void GetShowCast()
+        private static async Task GetShowCast()
         {
             var results = await _service.GetShowCastAsync(530);
 
@@ -301,7 +302,7 @@ Start:
             }
         }
 
-        private static async void GetShowCrew()
+        private static async Task GetShowCrew()
         {
             var results = await _service.GetShowCrewAsync(530);
 
@@ -315,7 +316,7 @@ Start:
             }
         }
 
-        private static async void GetShowAliases()
+        private static async Task GetShowAliases()
         {
             var results = await _service.GetShowAliasesAsync(171);
 
@@ -326,7 +327,7 @@ Start:
             }
         }
 
-        private static async void GetEpisodeInfo()
+        private static async Task GetEpisodeInfo()
         {
             var item = await _service.GetEpisodeByIdAsync(48221);
 
@@ -337,7 +338,7 @@ Start:
             Console.WriteLine("Summary: {0}", item.Summary);
         }
 
-        private static async void GetPersonInfo()
+        private static async Task GetPersonInfo()
         {
             var item = await _service.GetPersonInfoAsync(37759);
 
@@ -347,7 +348,7 @@ Start:
             Console.WriteLine("Image: {0}", item.Image?.Original);
         }
 
-        private static async void GetCastCredits()
+        private static async Task GetCastCredits()
         {
             var results = await _service.GetCastCreditsAsync(40598, "show", "character");
 
@@ -359,7 +360,7 @@ Start:
             }
         }
 
-        private static async void GetCrewCredits()
+        private static async Task GetCrewCredits()
         {
             var results = await _service.GetCrewCreditsAsync(100, "show");
 

@@ -1,42 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net451</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <IncludeSymbols>true</IncludeSymbols>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;net451</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <IncludeSymbols>true</IncludeSymbols>
+        <LangVersion>8.0</LangVersion>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <Version>1.0.0-alpha.5</Version>
-    <Authors>Peyman Mohammadi</Authors>
-    <PackageId>MovieCollection.TVMaze</PackageId>
-    <Copyright>© 2019 - 2020 Peyman Mohammadi</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>movie; series; api; wrapper; tvmaze</PackageTags>
-    <Description>Unofficial implementation of TVMaze API</Description>
-    <RepositoryUrl>https://github.com/peymanr34/tv-maze</RepositoryUrl>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageProjectUrl>https://github.com/peymanr34/tv-maze</PackageProjectUrl>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Version>1.0.0-alpha.5</Version>
+        <Authors>Peyman Mohammadi</Authors>
+        <PackageId>MovieCollection.TVMaze</PackageId>
+        <Copyright>© 2019 - 2020 Peyman Mohammadi</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>movie; series; api; wrapper; tvmaze</PackageTags>
+        <Description>Unofficial implementation of TVMaze API</Description>
+        <RepositoryUrl>https://github.com/peymanr34/tv-maze</RepositoryUrl>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageProjectUrl>https://github.com/peymanr34/tv-maze</PackageProjectUrl>
+    </PropertyGroup>
 
-  <!-- Conditionally obtain references for the .NET Framework 4.5.1 target -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <Reference Include="System.Web" />
-    <Reference Include="System.Net.Http" />
-  </ItemGroup>
+    <!-- Conditionally obtain references for the .NET Framework 4.5.1 target -->
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
+        <Reference Include="System.Web" />
+        <Reference Include="System.Net.Http" />
+    </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    </ItemGroup>
 
 </Project>

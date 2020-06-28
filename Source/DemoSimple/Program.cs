@@ -1,24 +1,34 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace DemoSimple
 {
-    class Program
+    internal class Program
     {
         // HttpClient is intended to be instantiated once per application, rather than per-use.
         // See https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient
         private static readonly HttpClient _httpClient = new HttpClient();
 
-        static void Main()
+        private static async Task Main()
         {
-            // SearchShow();
-            GetSchedule();
+            await GetSchedule();
+
+            Console.ReadKey();
+            Console.Clear();
+
+            await SearchShow();
+
+            Console.ReadKey();
+            Console.Clear();
+
+            await GetShowEpisode();
 
             // Wait for user to exit
             Console.ReadKey();
         }
 
-        private static async void SearchShow()
+        private static async Task SearchShow()
         {
             var service = new MovieCollection.TVMaze.TVMazeService(_httpClient);
             var results = await service.SearchShowsAsync("marvel");
@@ -33,7 +43,7 @@ namespace DemoSimple
             }
         }
 
-        private static async void GetSchedule()
+        private static async Task GetSchedule()
         {
             var service = new MovieCollection.TVMaze.TVMazeService(_httpClient);
             var results = await service.GetScheduleAsync(country: "GB");
@@ -49,7 +59,7 @@ namespace DemoSimple
             }
         }
 
-        private static async void GetShowEpisode()
+        private static async Task GetShowEpisode()
         {
             var service = new MovieCollection.TVMaze.TVMazeService(_httpClient);
             var item = await service.GetShowEpisodeAsync(16149, 2, 3);

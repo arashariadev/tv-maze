@@ -1,8 +1,7 @@
 ﻿[![Nuget Version][nuget-ver-badge]][nuget]
 [![Nuget Downloads][nuget-dl-badge]][nuget]
-[![License][license-badge]](LICENSE)
 
-# TVMaze API ![UNOFFICIAL][unofficial-badge]
+# TVMaze API
 Unofficial implementation of TVMaze API.
 
 ## Target frameworks
@@ -74,5 +73,3 @@ This project is licensed under the [MIT License](LICENSE).
 [nuget]: https://www.nuget.org/packages/MovieCollection.TVMaze
 [nuget-ver-badge]: https://img.shields.io/nuget/v/MovieCollection.TVMaze.svg?style=flat
 [nuget-dl-badge]: https://img.shields.io/nuget/dt/MovieCollection.TVMaze?color=red
-[unofficial-badge]: https://img.shields.io/badge/UNOFFICIAL-red
-[license-badge]: https://img.shields.io/github/license/peymanr34/tv-maze.svg?style=flat

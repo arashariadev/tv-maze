@@ -17,9 +17,9 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageTags>movie; series; api; wrapper; tvmaze</PackageTags>
         <Description>Unofficial implementation of TVMaze API</Description>
-        <RepositoryUrl>https://github.com/peymanr34/tv-maze</RepositoryUrl>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-        <PackageProjectUrl>https://github.com/peymanr34/tv-maze</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/moviecollection/tv-maze</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/moviecollection/tv-maze</PackageProjectUrl>
     </PropertyGroup>
 
     <!-- Conditionally obtain references for the .NET Framework 4.5.1 target -->

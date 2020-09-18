@@ -15,7 +15,7 @@ namespace MovieCollection.TVMaze
     public class TVMazeService : ITVMazeService
     {
         private readonly HttpClient _httpClient;
-        private readonly ITVMazeConfiguration _configuration;
+        private readonly TVMazeConfiguration _configuration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TVMazeService"/> class.
@@ -32,8 +32,8 @@ namespace MovieCollection.TVMaze
         /// Initializes a new instance of the <see cref="TVMazeService"/> class.
         /// </summary>
         /// <param name="httpClient">An instance of <see cref="HttpClient"/>.</param>
-        /// <param name="configuration">An instance of <see cref="ITVMazeConfiguration"/>.</param>
-        public TVMazeService(HttpClient httpClient, ITVMazeConfiguration configuration)
+        /// <param name="configuration">An instance of <see cref="TVMazeConfiguration"/>.</param>
+        public TVMazeService(HttpClient httpClient, TVMazeConfiguration configuration)
             : base()
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));

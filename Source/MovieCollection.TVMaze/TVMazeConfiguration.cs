@@ -3,7 +3,7 @@
     /// <summary>
     /// The <c>TVMazeConfiguration</c> class.
     /// </summary>
-    public class TVMazeConfiguration : ITVMazeConfiguration
+    public class TVMazeConfiguration
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TVMazeConfiguration"/> class.

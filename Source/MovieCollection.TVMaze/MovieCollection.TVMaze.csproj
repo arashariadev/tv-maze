@@ -7,7 +7,20 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <IncludeSymbols>true</IncludeSymbols>
         <LangVersion>8.0</LangVersion>
+        <NoWarn>SA1200;NU5105;CA1303;SA1309;SA1101;SA0001;SA1633;CA1055;CA2227</NoWarn>
     </PropertyGroup>
+
+    <!--
+    # SA1200: Using directive should appear within a namespace declaration.
+    # NU5105: Simver 2.0 older client warning.
+    # SA1101: Prefix local calls with this.
+    # SA1309: Field names should not begin with underscore.
+    # CA1303: Do not pass literals as localized parameters.
+    # SA0001: XML comment analysis is disabled due to project configuration.
+    # SA1633: The file header is missing or not located at the top of the file.
+    # CA1055: Change the return type of method from string to System.Uri.
+    # CA2227: Collection properties should be read only.
+    -->
 
     <PropertyGroup>
         <Version>1.0.0-alpha.5</Version>
@@ -28,15 +41,16 @@
         <Reference Include="System.Net.Http" />
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
 </Project>

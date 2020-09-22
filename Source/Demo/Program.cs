@@ -10,15 +10,13 @@ namespace Demo
         // HttpClient is intended to be instantiated once per application, rather than per-use.
         // See https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient
         private static readonly HttpClient _httpClient = new HttpClient();
-
-        private static TVMazeConfiguration _configuration;
         private static TVMazeService _service;
 
         private static async Task Main()
         {
-            // Initialize [API Key is optional]
-            _configuration = new TVMazeConfiguration();
-            _service = new TVMazeService(_httpClient, _configuration);
+            // Initialize
+            // Note: apiKey is optional.
+            _service = new TVMazeService(_httpClient);
 
 Start:
             Console.Clear();

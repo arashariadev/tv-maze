@@ -15,7 +15,7 @@ namespace MovieCollection.TVMaze
     public class TVMazeService : ITVMazeService
     {
         private readonly HttpClient _httpClient;
-        private readonly TVMazeConfiguration _configuration;
+        private readonly TVMazeOptions _options;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TVMazeService"/> class.
@@ -25,19 +25,19 @@ namespace MovieCollection.TVMaze
             : base()
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            _configuration = new TVMazeConfiguration();
+            _options = new TVMazeOptions();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TVMazeService"/> class.
         /// </summary>
         /// <param name="httpClient">An instance of <see cref="HttpClient"/>.</param>
-        /// <param name="configuration">An instance of <see cref="TVMazeConfiguration"/>.</param>
-        public TVMazeService(HttpClient httpClient, TVMazeConfiguration configuration)
+        /// <param name="options">An instance of <see cref="TVMazeOptions"/>.</param>
+        public TVMazeService(HttpClient httpClient, TVMazeOptions options)
             : base()
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
         /// <inheritdoc/>
@@ -380,7 +380,7 @@ namespace MovieCollection.TVMaze
 
         private async Task<string> GetJsonAsync(string requestUrl, List<KeyValuePair<string, string>> parameters = null)
         {
-            string url = _configuration.BaseAddress + requestUrl;
+            string url = _options.ApiAddress + requestUrl;
 
             if (parameters is null)
             {
@@ -388,9 +388,9 @@ namespace MovieCollection.TVMaze
             }
 
             // Add api key if defined to list
-            if (!string.IsNullOrWhiteSpace(_configuration.APIKey))
+            if (!string.IsNullOrWhiteSpace(_options.ApiKey))
             {
-                parameters.Add(new KeyValuePair<string, string>("apikey", _configuration.APIKey));
+                parameters.Add(new KeyValuePair<string, string>("apikey", _options.ApiKey));
             }
 
             // Concat parameters to URL

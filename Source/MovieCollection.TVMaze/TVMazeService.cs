@@ -43,9 +43,9 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<IList<Search>> SearchShowsAsync(string query)
         {
-            var parameters = new List<UrlParameter>()
+            var parameters = new List<KeyValuePair<string, string>>()
             {
-                new UrlParameter("q", System.Web.HttpUtility.UrlEncode(query)),
+                new KeyValuePair<string, string>("q", System.Web.HttpUtility.UrlEncode(query)),
             };
 
             string json = await GetJsonAsync("/search/shows", parameters)
@@ -57,14 +57,14 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<Show> SearchSingleShowAsync(string query, params string[] embed)
         {
-            var parameters = new List<UrlParameter>()
+            var parameters = new List<KeyValuePair<string, string>>()
             {
-                new UrlParameter("q", System.Web.HttpUtility.UrlEncode(query)),
+                new KeyValuePair<string, string>("q", System.Web.HttpUtility.UrlEncode(query)),
             };
 
             if (embed != null && embed.Length != 0)
             {
-                parameters.AddRange(GetEmbeddedPrameters(embed));
+                AddEmbeddedPrametersToList(embed, parameters);
             }
 
             string json = await GetJsonAsync("/singlesearch/shows", parameters)
@@ -76,9 +76,9 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<Show> SearchByIMDbIdAsync(string imdbId)
         {
-            var parameters = new List<UrlParameter>()
+            var parameters = new List<KeyValuePair<string, string>>()
             {
-                new UrlParameter("imdb", imdbId),
+                new KeyValuePair<string, string>("imdb", imdbId),
             };
 
             string json = await GetJsonAsync("/lookup/shows", parameters)
@@ -90,9 +90,9 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<Show> SearchByTVDbIdAsync(string tvdbId)
         {
-            var parameters = new List<UrlParameter>()
+            var parameters = new List<KeyValuePair<string, string>>()
             {
-                new UrlParameter("thetvdb", tvdbId),
+                new KeyValuePair<string, string>("thetvdb", tvdbId),
             };
 
             string json = await GetJsonAsync("/lookup/shows", parameters)
@@ -104,9 +104,9 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<Show> SearchByTVRageIdAsync(string tvRageId)
         {
-            var parameters = new List<UrlParameter>()
+            var parameters = new List<KeyValuePair<string, string>>()
             {
-                new UrlParameter("tvrage", tvRageId),
+                new KeyValuePair<string, string>("tvrage", tvRageId),
             };
 
             string json = await GetJsonAsync("/lookup/shows", parameters)
@@ -118,9 +118,9 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<IList<SearchPerson>> SearchPeopleAsync(string query)
         {
-            var parameters = new List<UrlParameter>()
+            var parameters = new List<KeyValuePair<string, string>>()
             {
-                new UrlParameter("q", System.Web.HttpUtility.UrlEncode(query)),
+                new KeyValuePair<string, string>("q", System.Web.HttpUtility.UrlEncode(query)),
             };
 
             string json = await GetJsonAsync("/search/people", parameters)
@@ -132,18 +132,18 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<IList<Schedule>> GetScheduleAsync(DateTime? dateTime = null, string country = null)
         {
-            var parameters = new List<UrlParameter>();
+            var parameters = new List<KeyValuePair<string, string>>();
 
             if (dateTime.HasValue)
             {
                 // Date is an ISO 8601 formatted date; defaults to the current day.
-                parameters.Add(new UrlParameter("date", dateTime.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)));
+                parameters.Add(new KeyValuePair<string, string>("date", dateTime.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)));
             }
 
             if (!string.IsNullOrEmpty(country))
             {
                 // CountryCode is an ISO 3166-1 code of the country; defaults to US.
-                parameters.Add(new UrlParameter("country", country));
+                parameters.Add(new KeyValuePair<string, string>("country", country));
             }
 
             string json = await GetJsonAsync("/schedule", parameters)
@@ -164,11 +164,11 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<Show> GetShowInfoAsync(int id, params string[] embed)
         {
-            var parameters = new List<UrlParameter>();
+            var parameters = new List<KeyValuePair<string, string>>();
 
             if (embed != null && embed.Length != 0)
             {
-                parameters.AddRange(GetEmbeddedPrameters(embed));
+                AddEmbeddedPrametersToList(embed, parameters);
             }
 
             string json = await GetJsonAsync($"/shows/{id}", parameters)
@@ -180,11 +180,11 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<IList<Episode>> GetShowEpisodesListAsync(int showId, bool specials = false)
         {
-            var parameters = new List<UrlParameter>();
+            var parameters = new List<KeyValuePair<string, string>>();
 
             if (specials == true)
             {
-                parameters.Add(new UrlParameter("specials", "1"));
+                parameters.Add(new KeyValuePair<string, string>("specials", "1"));
             }
 
             string json = await GetJsonAsync($"/shows/{showId}/episodes", parameters)
@@ -196,10 +196,10 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<Episode> GetShowEpisodeAsync(int showId, int season, int episode)
         {
-            var parameters = new List<UrlParameter>()
+            var parameters = new List<KeyValuePair<string, string>>()
             {
-                new UrlParameter("season", season),
-                new UrlParameter("number", episode),
+                new KeyValuePair<string, string>("season", season.ToString(CultureInfo.InvariantCulture)),
+                new KeyValuePair<string, string>("number", episode.ToString(CultureInfo.InvariantCulture)),
             };
 
             string json = await GetJsonAsync($"/shows/{showId}/episodebynumber", parameters)
@@ -211,9 +211,9 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<IList<Episode>> GetShowEpisodesByDateAsync(int showId, DateTime dateTime)
         {
-            var parameters = new List<UrlParameter>()
+            var parameters = new List<KeyValuePair<string, string>>()
             {
-                new UrlParameter("date", dateTime.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)),
+                new KeyValuePair<string, string>("date", dateTime.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)),
             };
 
             string json = await GetJsonAsync($"/shows/{showId}/episodesbydate", parameters)
@@ -270,9 +270,9 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<IList<Show>> GetShowIndexAsync(int page = 1)
         {
-            var parameters = new List<UrlParameter>()
+            var parameters = new List<KeyValuePair<string, string>>()
             {
-                new UrlParameter("page", page),
+                new KeyValuePair<string, string>("page", page.ToString(CultureInfo.InvariantCulture)),
             };
 
             string json = await GetJsonAsync("/shows", parameters)
@@ -284,11 +284,11 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<Episode> GetEpisodeByIdAsync(int episodeId, params string[] embed)
         {
-            var parameters = new List<UrlParameter>();
+            var parameters = new List<KeyValuePair<string, string>>();
 
             if (embed != null && embed.Length != 0)
             {
-                parameters.AddRange(GetEmbeddedPrameters(embed));
+                AddEmbeddedPrametersToList(embed, parameters);
             }
 
             string json = await GetJsonAsync($"/episodes/{episodeId}", parameters)
@@ -300,11 +300,11 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<Person> GetPersonInfoAsync(int personId, params string[] embed)
         {
-            var parameters = new List<UrlParameter>();
+            var parameters = new List<KeyValuePair<string, string>>();
 
             if (embed != null && embed.Length != 0)
             {
-                parameters.AddRange(GetEmbeddedPrameters(embed));
+                AddEmbeddedPrametersToList(embed, parameters);
             }
 
             string json = await GetJsonAsync($"/people/{personId}", parameters)
@@ -316,11 +316,11 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<IList<CastCredits>> GetCastCreditsAsync(int personId, params string[] embed)
         {
-            var parameters = new List<UrlParameter>();
+            var parameters = new List<KeyValuePair<string, string>>();
 
             if (embed != null && embed.Length != 0)
             {
-                parameters.AddRange(GetEmbeddedPrameters(embed));
+                AddEmbeddedPrametersToList(embed, parameters);
             }
 
             string json = await GetJsonAsync($"/people/{personId}/castcredits", parameters)
@@ -332,11 +332,11 @@ namespace MovieCollection.TVMaze
         /// <inheritdoc/>
         public async Task<IList<CrewCredits>> GetCrewCreditsAsync(int personId, params string[] embed)
         {
-            var parameters = new List<UrlParameter>();
+            var parameters = new List<KeyValuePair<string, string>>();
 
             if (embed != null && embed.Length != 0)
             {
-                parameters.AddRange(GetEmbeddedPrameters(embed));
+                AddEmbeddedPrametersToList(embed, parameters);
             }
 
             string json = await GetJsonAsync($"/people/{personId}/crewcredits", parameters)
@@ -345,59 +345,52 @@ namespace MovieCollection.TVMaze
             return JsonConvert.DeserializeObject<IList<CrewCredits>>(json);
         }
 
-        private static string GetParametersString(IEnumerable<UrlParameter> parameters)
+        private static string GetParametersString(IEnumerable<KeyValuePair<string, string>> parameters)
         {
             var builder = new StringBuilder();
 
             foreach (var item in parameters)
             {
                 builder.Append(builder.Length == 0 ? "?" : "&");
-                builder.Append(item.ToString());
+                builder.Append($"{item.Key}={item.Value}");
             }
 
             return builder.ToString();
         }
 
-        private static List<UrlParameter> GetEmbeddedPrameters(string[] embed)
+        private static void AddEmbeddedPrametersToList(string[] embed, List<KeyValuePair<string, string>> parameters)
         {
             if (embed is null)
             {
                 throw new ArgumentNullException(nameof(embed));
             }
 
-            var parameters = new List<UrlParameter>();
-
             if (embed.Length == 1)
             {
-                parameters.Add(new UrlParameter("embed", embed[0]));
-            }
-            else if (embed.Length > 1)
-            {
-                foreach (var item in embed)
-                {
-                    parameters.Add(new UrlParameter("embed[]", item));
-                }
+                parameters.Add(new KeyValuePair<string, string>("embed", embed[0]));
+                return;
             }
 
-            return parameters;
+            foreach (var item in embed)
+            {
+                parameters.Add(new KeyValuePair<string, string>("embed[]", item));
+                return;
+            }
         }
 
-        private async Task<string> GetJsonAsync(string requestUrl, IEnumerable<UrlParameter> requestParameters = null)
+        private async Task<string> GetJsonAsync(string requestUrl, List<KeyValuePair<string, string>> parameters = null)
         {
             string url = _configuration.BaseAddress + requestUrl;
 
-            var parameters = new List<UrlParameter>();
+            if (parameters is null)
+            {
+                parameters = new List<KeyValuePair<string, string>>();
+            }
 
             // Add api key if defined to list
             if (!string.IsNullOrWhiteSpace(_configuration.APIKey))
             {
-                parameters.Add(new UrlParameter("apikey", _configuration.APIKey));
-            }
-
-            // Add request specific parameters to list
-            if (requestParameters != null)
-            {
-                parameters.AddRange(requestParameters);
+                parameters.Add(new KeyValuePair<string, string>("apikey", _configuration.APIKey));
             }
 
             // Concat parameters to URL

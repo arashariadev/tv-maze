@@ -23,7 +23,7 @@
     -->
 
     <PropertyGroup>
-        <Version>1.0.0-alpha.5</Version>
+        <Version>1.0.0-alpha.6</Version>
         <Authors>Peyman Mohammadi</Authors>
         <PackageId>MovieCollection.TVMaze</PackageId>
         <Copyright>© 2019 - 2020 Peyman Mohammadi</Copyright>

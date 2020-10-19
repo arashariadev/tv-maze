@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net451</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <IncludeSymbols>true</IncludeSymbols>
@@ -23,7 +24,7 @@
     -->
 
     <PropertyGroup>
-        <Version>1.0.0-alpha.6</Version>
+        <Version>1.0.0-alpha.7</Version>
         <Authors>Peyman Mohammadi</Authors>
         <PackageId>MovieCollection.TVMaze</PackageId>
         <Copyright>© 2019 - 2020 Peyman Mohammadi</Copyright>
@@ -43,6 +44,10 @@
 
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -1,28 +1,17 @@
-﻿[![Nuget Version][nuget-ver-badge]][nuget]
-[![Nuget Downloads][nuget-dl-badge]][nuget]
-
 # TVMaze API
 Unofficial implementation of TVMaze API.
 
-## Target frameworks
-- .NET Standard 2.0
-- .NET Framework 4.5.1
-
-## Dependencies
-- [Newtonsoft.Json](https://www.newtonsoft.com/json) > 12.0.2
-
-## Limitaions
-- Premium capabilities has not been implemented.
-- Show Types, Genres, etc. are not strongly typed.
+[![Nuget Version][nuget-shield]][nuget]
+[![Nuget Downloads][nuget-shield-dl]][nuget]
 
 ## Installing
-Enter following command in your ```NuGet Package Manager```:
+You can install this package by entering the following command into your `Package Manager Console`:
 ```powershell
 Install-Package MovieCollection.TVMaze -PreRelease
 ```
 
-## Get Today's Schedule
-1. Define an application wide `HttpClient` if you haven't already.
+## How to use
+First, define an instance of the `HttpClient` class if you haven't already.
 
 ```csharp
 // HttpClient is intended to be instantiated once per application, rather than per-use.
@@ -30,9 +19,9 @@ Install-Package MovieCollection.TVMaze -PreRelease
 private static readonly HttpClient httpClient = new HttpClient();
 ```
 
-2. Initialize `TVMazeService`:
+Then, for getting today's schedule:
+
 ```csharp
-// Initialize
 var service = new MovieCollection.TVMaze.TVMazeService(httpClient);
 var results = await service.GetScheduleAsync(country: "GB");
 
@@ -56,20 +45,22 @@ Summary: <p>Suzy Klein introduces America's most talented young musicians in an 
 ...
 ```
 
-You can checkout `Demo` project for more samples.
+Please checkout the `Demo` project for more examples.
 
-## Change log
-Please visit releases page.
+## Limitations
+- Premium capabilities has not been implemented.
+- Show Types, Genres, etc. are not strongly typed.
 
-## Acknowledgments
-Special thanks to [TVMaze](https://www.tvmaze.com) for providing free API services.
-
-## TVMaze API License
-Please read TVMaze API license [here](https://www.tvmaze.com/api).
+## Notes
+- Thanks to [TVMaze][tvmaze] for providing free API services.
+- Please read [TVMaze API license][tvmaze-license] before using their API.
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
 
 [nuget]: https://www.nuget.org/packages/MovieCollection.TVMaze
-[nuget-ver-badge]: https://img.shields.io/nuget/v/MovieCollection.TVMaze.svg?style=flat
-[nuget-dl-badge]: https://img.shields.io/nuget/dt/MovieCollection.TVMaze?color=red
+[nuget-shield]: https://img.shields.io/nuget/v/MovieCollection.TVMaze.svg?label=Release
+[nuget-shield-dl]: https://img.shields.io/nuget/dt/MovieCollection.TVMaze?label=Downloads&color=red
+
+[tvmaze]: https://www.tvmaze.com
+[tvmaze-license]: https://www.tvmaze.com/api

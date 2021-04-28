@@ -48,10 +48,8 @@ namespace MovieCollection.TVMaze
                 new KeyValuePair<string, string>("q", System.Web.HttpUtility.UrlEncode(query)),
             };
 
-            string json = await GetJsonAsync("/search/shows", parameters)
+            return await GetJsonAsync<IList<Search>>("/search/shows", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<Search>>(json);
         }
 
         /// <inheritdoc/>
@@ -67,10 +65,8 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            string json = await GetJsonAsync("/singlesearch/shows", parameters)
+            return await GetJsonAsync<Show>("/singlesearch/shows", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<Show>(json);
         }
 
         /// <inheritdoc/>
@@ -81,10 +77,8 @@ namespace MovieCollection.TVMaze
                 new KeyValuePair<string, string>("imdb", imdbId),
             };
 
-            string json = await GetJsonAsync("/lookup/shows", parameters)
+            return await GetJsonAsync<Show>("/lookup/shows", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<Show>(json);
         }
 
         /// <inheritdoc/>
@@ -95,10 +89,8 @@ namespace MovieCollection.TVMaze
                 new KeyValuePair<string, string>("thetvdb", tvdbId),
             };
 
-            string json = await GetJsonAsync("/lookup/shows", parameters)
+            return await GetJsonAsync<Show>("/lookup/shows", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<Show>(json);
         }
 
         /// <inheritdoc/>
@@ -109,10 +101,8 @@ namespace MovieCollection.TVMaze
                 new KeyValuePair<string, string>("tvrage", tvRageId),
             };
 
-            string json = await GetJsonAsync("/lookup/shows", parameters)
+            return await GetJsonAsync<Show>("/lookup/shows", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<Show>(json);
         }
 
         /// <inheritdoc/>
@@ -123,10 +113,8 @@ namespace MovieCollection.TVMaze
                 new KeyValuePair<string, string>("q", System.Web.HttpUtility.UrlEncode(query)),
             };
 
-            string json = await GetJsonAsync("/search/people", parameters)
+            return await GetJsonAsync<IList<SearchPerson>>("/search/people", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<SearchPerson>>(json);
         }
 
         /// <inheritdoc/>
@@ -146,19 +134,15 @@ namespace MovieCollection.TVMaze
                 parameters.Add(new KeyValuePair<string, string>("country", country));
             }
 
-            string json = await GetJsonAsync("/schedule", parameters)
+            return await GetJsonAsync<IList<Schedule>>("/schedule", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<Schedule>>(json);
         }
 
         /// <inheritdoc/>
         public async Task<IList<Schedule>> GetFullScheduleAsync()
         {
-            string json = await GetJsonAsync("/schedule/full")
+            return await GetJsonAsync<IList<Schedule>>("/schedule/full")
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<Schedule>>(json);
         }
 
         /// <inheritdoc/>
@@ -171,10 +155,8 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            string json = await GetJsonAsync($"/shows/{id}", parameters)
+            return await GetJsonAsync<Show>($"/shows/{id}", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<Show>(json);
         }
 
         /// <inheritdoc/>
@@ -187,10 +169,8 @@ namespace MovieCollection.TVMaze
                 parameters.Add(new KeyValuePair<string, string>("specials", "1"));
             }
 
-            string json = await GetJsonAsync($"/shows/{showId}/episodes", parameters)
+            return await GetJsonAsync<IList<Episode>>($"/shows/{showId}/episodes", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<Episode>>(json);
         }
 
         /// <inheritdoc/>
@@ -202,10 +182,8 @@ namespace MovieCollection.TVMaze
                 new KeyValuePair<string, string>("number", episode.ToString(CultureInfo.InvariantCulture)),
             };
 
-            string json = await GetJsonAsync($"/shows/{showId}/episodebynumber", parameters)
+            return await GetJsonAsync<Episode>($"/shows/{showId}/episodebynumber", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<Episode>(json);
         }
 
         /// <inheritdoc/>
@@ -216,55 +194,43 @@ namespace MovieCollection.TVMaze
                 new KeyValuePair<string, string>("date", dateTime.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)),
             };
 
-            string json = await GetJsonAsync($"/shows/{showId}/episodesbydate", parameters)
+            return await GetJsonAsync<IList<Episode>>($"/shows/{showId}/episodesbydate", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<Episode>>(json);
         }
 
         /// <inheritdoc/>
         public async Task<IList<Season>> GetShowSeasonsAsync(int showId)
         {
-            string json = await GetJsonAsync($"/shows/{showId}/seasons")
+            return await GetJsonAsync<IList<Season>>($"/shows/{showId}/seasons")
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<Season>>(json);
         }
 
         /// <inheritdoc/>
         public async Task<IList<Episode>> GetSeasonEpisodesAsync(int seasonId)
         {
-            string json = await GetJsonAsync($"/seasons/{seasonId}/episodes")
+            return await GetJsonAsync<IList<Episode>>($"/seasons/{seasonId}/episodes")
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<Episode>>(json);
         }
 
         /// <inheritdoc/>
         public async Task<IList<Cast>> GetShowCastAsync(int showId)
         {
-            string json = await GetJsonAsync($"/shows/{showId}/cast")
+            return await GetJsonAsync<IList<Cast>>($"/shows/{showId}/cast")
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<Cast>>(json);
         }
 
         /// <inheritdoc/>
         public async Task<IList<Crew>> GetShowCrewAsync(int showId)
         {
-            string json = await GetJsonAsync($"/shows/{showId}/crew")
+            return await GetJsonAsync<IList<Crew>>($"/shows/{showId}/crew")
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<Crew>>(json);
         }
 
         /// <inheritdoc/>
         public async Task<IList<ShowAlias>> GetShowAliasesAsync(int showId)
         {
-            string json = await GetJsonAsync($"/shows/{showId}/akas")
+            return await GetJsonAsync<IList<ShowAlias>>($"/shows/{showId}/akas")
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<ShowAlias>>(json);
         }
 
         /// <inheritdoc/>
@@ -275,10 +241,8 @@ namespace MovieCollection.TVMaze
                 new KeyValuePair<string, string>("page", page.ToString(CultureInfo.InvariantCulture)),
             };
 
-            string json = await GetJsonAsync("/shows", parameters)
+            return await GetJsonAsync<IList<Show>>("/shows", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<Show>>(json);
         }
 
         /// <inheritdoc/>
@@ -291,10 +255,8 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            string json = await GetJsonAsync($"/episodes/{episodeId}", parameters)
+            return await GetJsonAsync<Episode>($"/episodes/{episodeId}", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<Episode>(json);
         }
 
         /// <inheritdoc/>
@@ -307,10 +269,8 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            string json = await GetJsonAsync($"/people/{personId}", parameters)
+            return await GetJsonAsync<Person>($"/people/{personId}", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<Person>(json);
         }
 
         /// <inheritdoc/>
@@ -323,10 +283,8 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            string json = await GetJsonAsync($"/people/{personId}/castcredits", parameters)
+            return await GetJsonAsync<IList<CastCredits>>($"/people/{personId}/castcredits", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<CastCredits>>(json);
         }
 
         /// <inheritdoc/>
@@ -339,10 +297,8 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            string json = await GetJsonAsync($"/people/{personId}/crewcredits", parameters)
+            return await GetJsonAsync<IList<CrewCredits>>($"/people/{personId}/crewcredits", parameters)
                 .ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IList<CrewCredits>>(json);
         }
 
         private static string GetParametersString(IEnumerable<KeyValuePair<string, string>> parameters)
@@ -378,7 +334,7 @@ namespace MovieCollection.TVMaze
             }
         }
 
-        private async Task<string> GetJsonAsync(string requestUrl, List<KeyValuePair<string, string>> parameters = null)
+        private async Task<T> GetJsonAsync<T>(string requestUrl, List<KeyValuePair<string, string>> parameters = null)
         {
             string url = _options.ApiAddress + requestUrl;
 
@@ -402,8 +358,10 @@ namespace MovieCollection.TVMaze
             // TODO: Maybe handle API Rate limit (429)?
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsStringAsync()
+            string json = await response.Content.ReadAsStringAsync()
                 .ConfigureAwait(false);
+
+            return JsonConvert.DeserializeObject<T>(json);
         }
     }
 }

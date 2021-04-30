@@ -2,7 +2,7 @@
 
 namespace MovieCollection.TVMaze.Models
 {
-    public class EpisodeLinks
+    public class Links
     {
         [JsonProperty("self")]
         public LinkDefinition Self { get; set; }

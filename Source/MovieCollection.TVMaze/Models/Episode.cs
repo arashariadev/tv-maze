@@ -39,6 +39,6 @@ namespace MovieCollection.TVMaze.Models
         public string Summary { get; set; }
 
         [JsonProperty("_links")]
-        public EpisodeLinks Links { get; set; }
+        public Links Links { get; set; }
     }
 }

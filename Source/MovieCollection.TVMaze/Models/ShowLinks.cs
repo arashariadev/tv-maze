@@ -2,12 +2,9 @@
 
 namespace MovieCollection.TVMaze.Models
 {
-    public class ShowLinks
+    public class ShowLinks : Links
     {
-        [JsonProperty("self")]
-        public LinkDefinition Self { get; set; }
-
-        [JsonProperty("previousepisode", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("previousepisode")]
         public LinkDefinition PreviousEpisode { get; set; }
     }
 }

@@ -30,6 +30,6 @@ namespace MovieCollection.TVMaze.Models
         public Image Image { get; set; }
 
         [JsonProperty("_links")]
-        public PersonLinks Links { get; set; }
+        public Links Links { get; set; }
     }
 }

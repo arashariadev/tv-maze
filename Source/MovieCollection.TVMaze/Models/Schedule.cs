@@ -39,7 +39,7 @@ namespace MovieCollection.TVMaze.Models
         public string Summary { get; set; }
 
         [JsonProperty("_links")]
-        public ScheduleLinks Links { get; set; }
+        public Links Links { get; set; }
 
         [JsonProperty("_embedded")]
         public Embedded Embedded { get; set; }

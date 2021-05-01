@@ -18,10 +18,10 @@ namespace MovieCollection.TVMaze.Models
         public Country Country { get; set; }
 
         [JsonProperty("birthday")]
-        public DateTimeOffset? Birthday { get; set; }
+        public string Birthday { get; set; }
 
         [JsonProperty("deathday")]
-        public object Deathday { get; set; }
+        public string Deathday { get; set; }
 
         [JsonProperty("gender")]
         public string Gender { get; set; }

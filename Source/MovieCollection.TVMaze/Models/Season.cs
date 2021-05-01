@@ -12,13 +12,13 @@ namespace MovieCollection.TVMaze.Models
         public Uri Url { get; set; }
 
         [JsonProperty("number")]
-        public long Number { get; set; }
+        public int Number { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
 
         [JsonProperty("episodeOrder")]
-        public long? EpisodeOrder { get; set; }
+        public int? EpisodeOrder { get; set; }
 
         [JsonProperty("premiereDate")]
         public DateTimeOffset? PremiereDate { get; set; }
@@ -30,7 +30,7 @@ namespace MovieCollection.TVMaze.Models
         public Network Network { get; set; }
 
         [JsonProperty("webChannel")]
-        public object WebChannel { get; set; }
+        public Network WebChannel { get; set; }
 
         [JsonProperty("image")]
         public Image Image { get; set; }

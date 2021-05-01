@@ -28,7 +28,7 @@ namespace MovieCollection.TVMaze.Models
         public string Status { get; set; }
 
         [JsonProperty("runtime")]
-        public long? Runtime { get; set; }
+        public int? Runtime { get; set; }
 
         [JsonProperty("premiered")]
         public DateTimeOffset? Premiered { get; set; }
@@ -43,7 +43,7 @@ namespace MovieCollection.TVMaze.Models
         public Rating Rating { get; set; }
 
         [JsonProperty("weight")]
-        public long Weight { get; set; }
+        public int Weight { get; set; }
 
         [JsonProperty("network")]
         public Network Network { get; set; }

@@ -15,13 +15,16 @@ namespace MovieCollection.TVMaze.Models
         public string Name { get; set; }
 
         [JsonProperty("season")]
-        public long Season { get; set; }
+        public int Season { get; set; }
 
         [JsonProperty("number")]
-        public long? Number { get; set; }
+        public int? Number { get; set; }
+
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
         [JsonProperty("airdate")]
-        public DateTimeOffset AirDate { get; set; }
+        public string AirDate { get; set; }
 
         [JsonProperty("airtime")]
         public string AirTime { get; set; }
@@ -30,7 +33,7 @@ namespace MovieCollection.TVMaze.Models
         public DateTimeOffset AirStamp { get; set; }
 
         [JsonProperty("runtime")]
-        public long? Runtime { get; set; }
+        public int? Runtime { get; set; }
 
         [JsonProperty("image")]
         public Image Image { get; set; }

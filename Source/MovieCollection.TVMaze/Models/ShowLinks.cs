@@ -6,5 +6,8 @@ namespace MovieCollection.TVMaze.Models
     {
         [JsonProperty("previousepisode")]
         public LinkDefinition PreviousEpisode { get; set; }
+
+        [JsonProperty("nextepisode")]
+        public LinkDefinition Nextepisode { get; set; }
     }
 }

@@ -139,6 +139,27 @@ namespace MovieCollection.TVMaze
         }
 
         /// <inheritdoc/>
+        public async Task<IList<Schedule>> GetStreamingScheduleAsync(DateTime? dateTime = null, string country = null)
+        {
+            var parameters = new List<KeyValuePair<string, string>>();
+
+            if (dateTime.HasValue)
+            {
+                // Date is an ISO 8601 formatted date; defaults to the current day.
+                parameters.Add(new KeyValuePair<string, string>("date", dateTime.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)));
+            }
+
+            if (!string.IsNullOrEmpty(country))
+            {
+                // CountryCode is an ISO 3166-1 code of the country; defaults to US.
+                parameters.Add(new KeyValuePair<string, string>("country", country));
+            }
+
+            return await GetJsonAsync<IList<Schedule>>("/schedule/web", parameters)
+                .ConfigureAwait(false);
+        }
+
+        /// <inheritdoc/>
         public async Task<IList<Schedule>> GetFullScheduleAsync()
         {
             return await GetJsonAsync<IList<Schedule>>("/schedule/full")

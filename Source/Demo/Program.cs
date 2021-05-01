@@ -15,35 +15,36 @@ namespace Demo
         private static async Task Main()
         {
             // Initialize
-            // Note: apiKey is optional.
+            // Note: The 'ApiKey' is optional.
             _service = new TVMazeService(_httpClient);
 
 Start:
             Console.Clear();
-            Console.WriteLine("Welcome to TVMaze demo.\n");
+            Console.WriteLine("Welcome to the TVMaze demo.\n");
 
             string[] items = new string[]
             {
-                "1. Search TV Shows",
-                "2. Search Single TV Show",
-                "3. Search By IMDb Id",
-                "4. Search By TVDb Id",
-                "5. Search By TVRage Id",
-                "6. Search People",
-                "7. Get Today's Schedule",
-                "8. Get Show Info (by Id)",
-                "9. Get Show Episodes",
-                "10. Get Show Specific Episode",
-                "11. Get Show Episodes by date",
-                "12. Get Show Seasons",
-                "13. Get Season Episodes",
-                "14. Get Show Cast",
-                "15. Get Show Crew",
-                "16. Get Show AKA's",
-                "17. Get Episode Info",
-                "18. Get Person Info",
-                "19. Get Person Cast Credits",
-                "20. Get Crew Credits"
+                "1. Show search",
+                "2. Show single search",
+                "3. Show search: IMDb Id",
+                "4. Show search: TVDb Id",
+                "5. Show search: TVRage Id",
+                "6. People search",
+                "7. Schedule",
+                "8. Web/streaming schedule",
+                "9. Show main information",
+                "10. Show episode list",
+                "11. Episode by number",
+                "12. Episodes by date",
+                "13. Show seasons",
+                "14. Season episodes",
+                "15. Show cast",
+                "16. Show crew",
+                "17. Show AKA's (aliases)",
+                "18. Episode main information",
+                "19. Person main information",
+                "20. Person cast credits",
+                "21. Person crew credits"
             };
 
             foreach (var item in items)
@@ -56,70 +57,32 @@ Start:
 
             Console.Clear();
 
-            switch (input)
+            var task = input switch
             {
-                default:
-                case 1:
-                    await SearchShows();
-                    break;
-                case 2:
-                    await SearchSingleShow();
-                    break;
-                case 3:
-                    await SearchByIMDbId();
-                    break;
-                case 4:
-                    await SearchByTVDbId();
-                    break;
-                case 5:
-                    await SearchByTVRageId();
-                    break;
-                case 6:
-                    await SearchPeople();
-                    break;
-                case 7:
-                    await GetSchedule();
-                    break;
-                case 8:
-                    await GetShowInfo();
-                    break;
-                case 9:
-                    await GetShowEpisodes();
-                    break;
-                case 10:
-                    await GetShowEpisode();
-                    break;
-                case 11:
-                    await GetShowEpisodesByDate();
-                    break;
-                case 12:
-                    await GetShowSeasons();
-                    break;
-                case 13:
-                    await GetSeasonEpisodes();
-                    break;
-                case 14:
-                    await GetShowCast();
-                    break;
-                case 15:
-                    await GetShowCrew();
-                    break;
-                case 16:
-                    await GetShowAliases();
-                    break;
-                case 17:
-                    await GetEpisodeInfo();
-                    break;
-                case 18:
-                    await GetPersonInfo();
-                    break;
-                case 19:
-                    await GetCastCredits();
-                    break;
-                case 20:
-                    await GetCrewCredits();
-                    break;
-            }
+                2 => SearchSingleShow(),
+                3 => SearchByIMDbId(),
+                4 => SearchByTVDbId(),
+                5 => SearchByTVRageId(),
+                6 => SearchPeople(),
+                7 => GetSchedule(),
+                8 => GetWebSchedule(),
+                9 => GetShowInfo(),
+                10 => GetShowEpisodes(),
+                11 => GetShowEpisode(),
+                12 => GetShowEpisodesByDate(),
+                13 => GetShowSeasons(),
+                14 => GetSeasonEpisodes(),
+                15 => GetShowCast(),
+                16 => GetShowCrew(),
+                17 => GetShowAliases(),
+                18 => GetEpisodeInfo(),
+                19 => GetPersonInfo(),
+                20 => GetCastCredits(),
+                21 => GetCrewCredits(),
+                _ => SearchShows(),
+            };
+
+            await task;
 
             // Wait for user to Exit
             Console.WriteLine("Press any key to go back to menu...");
@@ -130,7 +93,7 @@ Start:
 
         private static async Task SearchShows()
         {
-            var results = await _service.SearchShowsAsync("marvel");
+            var results = await _service.SearchShowsAsync("fleabag");
 
             foreach (var item in results)
             {
@@ -144,7 +107,7 @@ Start:
 
         private static async Task SearchSingleShow()
         {
-            var item = await _service.SearchSingleShowAsync("frasier");
+            var item = await _service.SearchSingleShowAsync("black books");
 
             Console.WriteLine("Id: {0}", item.Id);
             Console.WriteLine("Name: {0}", item.Name);
@@ -154,7 +117,8 @@ Start:
 
         private static async Task SearchByIMDbId()
         {
-            var item = await _service.SearchByIMDbIdAsync("tt0098904");
+            // BoJack Horseman
+            var item = await _service.SearchByIMDbIdAsync("tt3398228");
 
             Console.WriteLine("Id: {0}", item.Id);
             Console.WriteLine("Name: {0}", item.Name);
@@ -164,7 +128,8 @@ Start:
 
         private static async Task SearchByTVDbId()
         {
-            var item = await _service.SearchByTVDbIdAsync("81189");
+            // Solar Opposites
+            var item = await _service.SearchByTVDbIdAsync("375892");
 
             Console.WriteLine("Id: {0}", item.Id);
             Console.WriteLine("Name: {0}", item.Name);
@@ -207,6 +172,21 @@ Start:
                 Console.WriteLine("Show Name: {0}", item.Show?.Name);
                 Console.WriteLine("Episode Name: {0}", item.Name);
                 Console.WriteLine("Network Name: {0}", item.Show?.Network?.Name);
+                Console.WriteLine("Summary: {0}", item.Summary);
+                Console.WriteLine("******************************");
+            }
+        }
+
+        private static async Task GetWebSchedule()
+        {
+            var results = await _service.GetStreamingScheduleAsync(country: "US");
+
+            foreach (var item in results)
+            {
+                Console.WriteLine("Id: {0}", item.Id);
+                Console.WriteLine("Show Name: {0}", item.Embedded?.Show?.Name);
+                Console.WriteLine("Episode Name: {0}", item.Name);
+                Console.WriteLine("Network Name: {0}", item.Embedded?.Show?.WebChannel?.Name);
                 Console.WriteLine("Summary: {0}", item.Summary);
                 Console.WriteLine("******************************");
             }

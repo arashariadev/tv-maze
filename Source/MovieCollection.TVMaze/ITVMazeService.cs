@@ -59,12 +59,29 @@ namespace MovieCollection.TVMaze
         /// <summary>
         /// The schedule is a complete list of episodes that air in a given country on a given date.
         /// Episodes are returned in the order in which they are aired, and full information about the episode and the corresponding show is included.
-        /// Note that contrary to what you might expect, the ISO country code for the United Kingdom is not UK, but GB.
         /// </summary>
+        /// <remarks>
+        /// Note that contrary to what you might expect, the ISO country code for the United Kingdom is not UK, but GB.
+        /// </remarks>
         /// <param name="dateTime">Schedule date (Defaults to the current day).</param>
         /// <param name="country">Schedule country (Defaults to US).</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         Task<IList<Schedule>> GetScheduleAsync(DateTime? dateTime = null, string country = null);
+
+        /// <summary>
+        /// The web schedule is a complete list of episodes that air on web/streaming channels on a given date.
+        /// TVmaze distinguishes between local and global Web Channels: local Web Channels are only available in one
+        /// specific country, while global Web Channels are available in multiple countries.
+        /// </summary>
+        /// <remarks>
+        /// To query both local and global Web Channels, leave out the country parameter.
+        /// To query only local Web Channels, set country to an ISO country code.
+        /// And to query only global Web Channels, set country to an empty string.
+        /// </remarks>
+        /// <param name="dateTime">Schedule date (Defaults to the current day).</param>
+        /// <param name="country">Schedule country (Defaults to US).</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        Task<IList<Schedule>> GetStreamingScheduleAsync(DateTime? dateTime = null, string country = null);
 
         /// <summary>
         /// The full schedule is a list of all future episodes known to TVmaze, regardless of their country.

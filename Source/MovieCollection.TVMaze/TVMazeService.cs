@@ -185,7 +185,7 @@ namespace MovieCollection.TVMaze
         {
             var parameters = new List<KeyValuePair<string, string>>();
 
-            if (specials == true)
+            if (specials)
             {
                 parameters.Add(new KeyValuePair<string, string>("specials", "1"));
             }

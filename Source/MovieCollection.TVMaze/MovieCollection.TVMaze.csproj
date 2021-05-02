@@ -30,7 +30,7 @@
     -->
 
     <PropertyGroup>
-        <Version>1.0.0-alpha.8</Version>
+        <Version>1.0.0-alpha.9</Version>
         <Authors>Peyman Mohammadi</Authors>
         <PackageId>MovieCollection.TVMaze</PackageId>
         <Copyright>© 2019 - 2021 Peyman Mohammadi</Copyright>

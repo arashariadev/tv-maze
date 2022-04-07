@@ -35,6 +35,9 @@ namespace MovieCollection.TVMaze.Models
         [JsonProperty("runtime")]
         public int Runtime { get; set; }
 
+        [JsonProperty("rating")]
+        public Rating Rating { get; set; }
+
         [JsonProperty("image")]
         public Image Image { get; set; }
 

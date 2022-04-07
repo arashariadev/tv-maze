@@ -157,6 +157,7 @@ Start:
                 Console.WriteLine("Name: {0}", item.Person.Name);
                 Console.WriteLine("Image: {0}", item.Person.Image?.Original);
                 Console.WriteLine("Birthday: {0}", item.Person.Birthday);
+                Console.WriteLine("Updated: {0}", item.Person.Updated);
                 Console.WriteLine("******************************");
             }
         }
@@ -324,6 +325,7 @@ Start:
             Console.WriteLine("Name: {0}", item.Name);
             Console.WriteLine("Birthday: {0}", item.Birthday);
             Console.WriteLine("Image: {0}", item.Image?.Original);
+            Console.WriteLine("Updated: {0}", item.Updated);
         }
 
         private static async Task GetCastCredits()

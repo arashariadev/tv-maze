@@ -469,6 +469,25 @@ namespace MovieCollection.TVMaze
                 .ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// A list of all people in our database, please refer to the <seealso cref="GetShowIndexAsync(int)"/> documentation.
+        /// </summary>
+        /// <remarks>
+        /// A maximum of 1000 results per page is returned.
+        /// </remarks>
+        /// <param name="page">The page number.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task<IList<Person>> GetPersonIndexAsync(int page = 1)
+        {
+            var parameters = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("page", page.ToString(CultureInfo.InvariantCulture)),
+            };
+
+            return await GetJsonAsync<IList<Person>>("/people", parameters)
+                .ConfigureAwait(false);
+        }
+
         private static string GetParametersString(IEnumerable<KeyValuePair<string, string>> parameters)
         {
             var builder = new StringBuilder();

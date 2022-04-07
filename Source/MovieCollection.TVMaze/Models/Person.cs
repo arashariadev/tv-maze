@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace MovieCollection.TVMaze.Models
 {
@@ -28,6 +29,10 @@ namespace MovieCollection.TVMaze.Models
 
         [JsonProperty("image")]
         public Image Image { get; set; }
+
+        [JsonProperty("updated")]
+        [JsonConverter(typeof(UnixDateTimeConverter))]
+        public DateTimeOffset? Updated { get; set; }
 
         [JsonProperty("_links")]
         public Links Links { get; set; }

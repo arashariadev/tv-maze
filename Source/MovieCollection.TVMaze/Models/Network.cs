@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace MovieCollection.TVMaze.Models
 {
@@ -12,5 +13,8 @@ namespace MovieCollection.TVMaze.Models
 
         [JsonProperty("country")]
         public Country Country { get; set; }
+
+        [JsonProperty("officialSite")]
+        public Uri OfficialSite { get; set; }
     }
 }

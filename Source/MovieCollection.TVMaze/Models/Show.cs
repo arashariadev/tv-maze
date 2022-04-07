@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace MovieCollection.TVMaze.Models
 {
@@ -30,8 +31,14 @@ namespace MovieCollection.TVMaze.Models
         [JsonProperty("runtime")]
         public int? Runtime { get; set; }
 
+        [JsonProperty("averageRuntime")]
+        public int? AverageRuntime { get; set; }
+
         [JsonProperty("premiered")]
         public DateTimeOffset? Premiered { get; set; }
+
+        [JsonProperty("ended")]
+        public DateTimeOffset? Ended { get; set; }
 
         [JsonProperty("officialSite")]
         public Uri OfficialSite { get; set; }
@@ -51,6 +58,9 @@ namespace MovieCollection.TVMaze.Models
         [JsonProperty("webChannel")]
         public Network WebChannel { get; set; }
 
+        [JsonProperty("dvdCountry")]
+        public Country DvdCountry { get; set; }
+
         [JsonProperty("externals")]
         public Externals Externals { get; set; }
 
@@ -61,7 +71,8 @@ namespace MovieCollection.TVMaze.Models
         public string Summary { get; set; }
 
         [JsonProperty("updated")]
-        public long Updated { get; set; }
+        [JsonConverter(typeof(UnixDateTimeConverter))]
+        public DateTimeOffset? Updated { get; set; }
 
         [JsonProperty("_links")]
         public ShowLinks Links { get; set; }

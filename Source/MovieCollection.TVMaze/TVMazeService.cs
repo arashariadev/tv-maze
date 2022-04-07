@@ -47,7 +47,7 @@ namespace MovieCollection.TVMaze
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
-                new KeyValuePair<string, string>("q", System.Web.HttpUtility.UrlEncode(query)),
+                new KeyValuePair<string, string>("q", query),
             };
 
             return await GetJsonAsync<IList<Search>>("/search/shows", parameters)
@@ -67,7 +67,7 @@ namespace MovieCollection.TVMaze
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
-                new KeyValuePair<string, string>("q", System.Web.HttpUtility.UrlEncode(query)),
+                new KeyValuePair<string, string>("q", query),
             };
 
             if (embed != null && embed.Length != 0)
@@ -136,7 +136,7 @@ namespace MovieCollection.TVMaze
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
-                new KeyValuePair<string, string>("q", System.Web.HttpUtility.UrlEncode(query)),
+                new KeyValuePair<string, string>("q", query),
             };
 
             return await GetJsonAsync<IList<SearchPerson>>("/search/people", parameters)

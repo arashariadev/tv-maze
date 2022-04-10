@@ -41,10 +41,11 @@ Start:
                 "15. Show cast",
                 "16. Show crew",
                 "17. Show AKA's (aliases)",
-                "18. Episode main information",
-                "19. Person main information",
-                "20. Person cast credits",
-                "21. Person crew credits"
+                "18. Show Images",
+                "19. Episode main information",
+                "20. Person main information",
+                "21. Person cast credits",
+                "22. Person crew credits",
             };
 
             foreach (var item in items)
@@ -75,10 +76,11 @@ Start:
                 15 => GetShowCast(),
                 16 => GetShowCrew(),
                 17 => GetShowAliases(),
-                18 => GetEpisodeInfo(),
-                19 => GetPersonInfo(),
-                20 => GetCastCredits(),
-                21 => GetCrewCredits(),
+                18 => GetShowImages(),
+                19 => GetEpisodeInfo(),
+                20 => GetPersonInfo(),
+                21 => GetCastCredits(),
+                22 => GetCrewCredits(),
                 _ => SearchShows(),
             };
 
@@ -303,6 +305,36 @@ Start:
             {
                 Console.WriteLine("Name: {0}", item.Name);
                 Console.WriteLine("Country: {0}", item.Country?.Name);
+            }
+        }
+
+        private static async Task GetShowImages()
+        {
+            var results = await _service.GetShowImagesAsync(269);
+
+            foreach (var item in results)
+            {
+                Console.WriteLine("Id: {0}", item.Id);
+                Console.WriteLine("Type: {0}", item.Type);
+                Console.WriteLine("Main: {0}", item.Main);
+
+                if (item.Resolutions.Original != null)
+                {
+                    Console.WriteLine("\n- Original:\n");
+                    Console.WriteLine("Url: {0}", item.Resolutions.Original.Url);
+                    Console.WriteLine("Width: {0}", item.Resolutions.Original.Width);
+                    Console.WriteLine("Height: {0}", item.Resolutions.Original.Height);
+                }
+
+                if (item.Resolutions.Medium != null)
+                {
+                    Console.WriteLine("\n- Medium:\n");
+                    Console.WriteLine("Url: {0}", item.Resolutions.Medium.Url);
+                    Console.WriteLine("Width: {0}", item.Resolutions.Medium.Width);
+                    Console.WriteLine("Height: {0}", item.Resolutions.Medium.Height);
+                }
+
+                Console.WriteLine("******************************");
             }
         }
 

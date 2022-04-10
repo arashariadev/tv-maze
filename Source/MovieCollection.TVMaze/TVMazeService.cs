@@ -362,6 +362,18 @@ namespace MovieCollection.TVMaze
         }
 
         /// <summary>
+        /// A list of all images available for this show.
+        /// The image type can be "poster", "banner", "background", "typography", or NULL in case of legacy unclassified images.
+        /// </summary>
+        /// <param name="showId">The show id.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task<IList<ShowImages>> GetShowImagesAsync(int showId)
+        {
+            return await GetJsonAsync<IList<ShowImages>>($"/shows/{showId}/images")
+                .ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// A list of all shows in our database, with all primary information included.
         /// You can use this endpoint for example if you want to build a local cache of all shows contained in the TVmaze database.
         /// This endpoint is paginated, with a maximum of 250 results per page.

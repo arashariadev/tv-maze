@@ -43,15 +43,14 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="query">The search query.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Search>> SearchShowsAsync(string query)
+        public Task<IList<Search>> SearchShowsAsync(string query)
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
                 new KeyValuePair<string, string>("q", query),
             };
 
-            return await GetJsonAsync<IList<Search>>("/search/shows", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Search>>("/search/shows", parameters);
         }
 
         /// <summary>
@@ -63,7 +62,7 @@ namespace MovieCollection.TVMaze
         /// <param name="query">The search query.</param>
         /// <param name="embed">The embeddings.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<Show> SearchSingleShowAsync(string query, params string[] embed)
+        public Task<Show> SearchSingleShowAsync(string query, params string[] embed)
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
@@ -75,8 +74,7 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            return await GetJsonAsync<Show>("/singlesearch/shows", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<Show>("/singlesearch/shows", parameters);
         }
 
         /// <summary>
@@ -84,15 +82,14 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="imdbId">The imdb id of the show.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<Show> SearchByIMDbIdAsync(string imdbId)
+        public Task<Show> SearchByIMDbIdAsync(string imdbId)
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
                 new KeyValuePair<string, string>("imdb", imdbId),
             };
 
-            return await GetJsonAsync<Show>("/lookup/shows", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<Show>("/lookup/shows", parameters);
         }
 
         /// <summary>
@@ -100,15 +97,14 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="tvdbId">The tvdb id of the show.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<Show> SearchByTVDbIdAsync(string tvdbId)
+        public Task<Show> SearchByTVDbIdAsync(string tvdbId)
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
                 new KeyValuePair<string, string>("thetvdb", tvdbId),
             };
 
-            return await GetJsonAsync<Show>("/lookup/shows", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<Show>("/lookup/shows", parameters);
         }
 
         /// <summary>
@@ -116,15 +112,14 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="tvRageId">The tvrage id of the show.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<Show> SearchByTVRageIdAsync(string tvRageId)
+        public Task<Show> SearchByTVRageIdAsync(string tvRageId)
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
                 new KeyValuePair<string, string>("tvrage", tvRageId),
             };
 
-            return await GetJsonAsync<Show>("/lookup/shows", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<Show>("/lookup/shows", parameters);
         }
 
         /// <summary>
@@ -132,15 +127,14 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="query">The search query.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<SearchPerson>> SearchPeopleAsync(string query)
+        public Task<IList<SearchPerson>> SearchPeopleAsync(string query)
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
                 new KeyValuePair<string, string>("q", query),
             };
 
-            return await GetJsonAsync<IList<SearchPerson>>("/search/people", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<SearchPerson>>("/search/people", parameters);
         }
 
         /// <summary>
@@ -153,7 +147,7 @@ namespace MovieCollection.TVMaze
         /// <param name="dateTime">The schedule date (defaults to the present day).</param>
         /// <param name="country">The schedule country (defaults to "US").</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Schedule>> GetScheduleAsync(DateTime? dateTime = null, string country = null)
+        public Task<IList<Schedule>> GetScheduleAsync(DateTime? dateTime = null, string country = null)
         {
             var parameters = new List<KeyValuePair<string, string>>();
 
@@ -169,8 +163,7 @@ namespace MovieCollection.TVMaze
                 parameters.Add(new KeyValuePair<string, string>("country", country));
             }
 
-            return await GetJsonAsync<IList<Schedule>>("/schedule", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Schedule>>("/schedule", parameters);
         }
 
         /// <summary>
@@ -186,7 +179,7 @@ namespace MovieCollection.TVMaze
         /// <param name="dateTime">The schedule date (defaults to the present day).</param>
         /// <param name="country">The schedule country (defaults to "US").</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Schedule>> GetStreamingScheduleAsync(DateTime? dateTime = null, string country = null)
+        public Task<IList<Schedule>> GetStreamingScheduleAsync(DateTime? dateTime = null, string country = null)
         {
             var parameters = new List<KeyValuePair<string, string>>();
 
@@ -202,8 +195,7 @@ namespace MovieCollection.TVMaze
                 parameters.Add(new KeyValuePair<string, string>("country", country));
             }
 
-            return await GetJsonAsync<IList<Schedule>>("/schedule/web", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Schedule>>("/schedule/web", parameters);
         }
 
         /// <summary>
@@ -212,10 +204,9 @@ namespace MovieCollection.TVMaze
         /// As opposed to the other endpoints, results are cached for 24 hours.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Schedule>> GetFullScheduleAsync()
+        public Task<IList<Schedule>> GetFullScheduleAsync()
         {
-            return await GetJsonAsync<IList<Schedule>>("/schedule/full")
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Schedule>>("/schedule/full");
         }
 
         /// <summary>
@@ -227,7 +218,7 @@ namespace MovieCollection.TVMaze
         /// <param name="showId">The show id.</param>
         /// <param name="embed">The embeddings.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<Show> GetShowInfoAsync(int showId, params string[] embed)
+        public Task<Show> GetShowInfoAsync(int showId, params string[] embed)
         {
             var parameters = new List<KeyValuePair<string, string>>();
 
@@ -236,8 +227,7 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            return await GetJsonAsync<Show>($"/shows/{showId}", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<Show>($"/shows/{showId}", parameters);
         }
 
         /// <summary>
@@ -248,7 +238,7 @@ namespace MovieCollection.TVMaze
         /// <param name="showId">The show id.</param>
         /// <param name="specials">Should specials be included.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Episode>> GetShowEpisodesListAsync(int showId, bool specials = false)
+        public Task<IList<Episode>> GetShowEpisodesListAsync(int showId, bool specials = false)
         {
             var parameters = new List<KeyValuePair<string, string>>();
 
@@ -257,8 +247,7 @@ namespace MovieCollection.TVMaze
                 parameters.Add(new KeyValuePair<string, string>("specials", "1"));
             }
 
-            return await GetJsonAsync<IList<Episode>>($"/shows/{showId}/episodes", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Episode>>($"/shows/{showId}/episodes", parameters);
         }
 
         /// <summary>
@@ -269,7 +258,7 @@ namespace MovieCollection.TVMaze
         /// <param name="season">The season number.</param>
         /// <param name="episode">The episode number.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<Episode> GetShowEpisodeAsync(int showId, int season, int episode)
+        public Task<Episode> GetShowEpisodeAsync(int showId, int season, int episode)
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
@@ -277,8 +266,7 @@ namespace MovieCollection.TVMaze
                 new KeyValuePair<string, string>("number", episode.ToString(CultureInfo.InvariantCulture)),
             };
 
-            return await GetJsonAsync<Episode>($"/shows/{showId}/episodebynumber", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<Episode>($"/shows/{showId}/episodebynumber", parameters);
         }
 
         /// <summary>
@@ -289,15 +277,14 @@ namespace MovieCollection.TVMaze
         /// <param name="showId">The show id.</param>
         /// <param name="dateTime">The episode date.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Episode>> GetShowEpisodesByDateAsync(int showId, DateTime dateTime)
+        public Task<IList<Episode>> GetShowEpisodesByDateAsync(int showId, DateTime dateTime)
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
                 new KeyValuePair<string, string>("date", dateTime.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)),
             };
 
-            return await GetJsonAsync<IList<Episode>>($"/shows/{showId}/episodesbydate", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Episode>>($"/shows/{showId}/episodesbydate", parameters);
         }
 
         /// <summary>
@@ -306,10 +293,9 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="showId">The show id.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Season>> GetShowSeasonsAsync(int showId)
+        public Task<IList<Season>> GetShowSeasonsAsync(int showId)
         {
-            return await GetJsonAsync<IList<Season>>($"/shows/{showId}/seasons")
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Season>>($"/shows/{showId}/seasons");
         }
 
         /// <summary>
@@ -318,10 +304,9 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="seasonId">The season id.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Episode>> GetSeasonEpisodesAsync(int seasonId)
+        public Task<IList<Episode>> GetSeasonEpisodesAsync(int seasonId)
         {
-            return await GetJsonAsync<IList<Episode>>($"/seasons/{seasonId}/episodes")
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Episode>>($"/seasons/{seasonId}/episodes");
         }
 
         /// <summary>
@@ -331,10 +316,9 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="showId">The show id.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Cast>> GetShowCastAsync(int showId)
+        public Task<IList<Cast>> GetShowCastAsync(int showId)
         {
-            return await GetJsonAsync<IList<Cast>>($"/shows/{showId}/cast")
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Cast>>($"/shows/{showId}/cast");
         }
 
         /// <summary>
@@ -343,10 +327,9 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="showId">The show id.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Crew>> GetShowCrewAsync(int showId)
+        public Task<IList<Crew>> GetShowCrewAsync(int showId)
         {
-            return await GetJsonAsync<IList<Crew>>($"/shows/{showId}/crew")
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Crew>>($"/shows/{showId}/crew");
         }
 
         /// <summary>
@@ -355,10 +338,9 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="showId">The show id.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<ShowAlias>> GetShowAliasesAsync(int showId)
+        public Task<IList<ShowAlias>> GetShowAliasesAsync(int showId)
         {
-            return await GetJsonAsync<IList<ShowAlias>>($"/shows/{showId}/akas")
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<ShowAlias>>($"/shows/{showId}/akas");
         }
 
         /// <summary>
@@ -367,10 +349,9 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="showId">The show id.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<ShowImages>> GetShowImagesAsync(int showId)
+        public Task<IList<ShowImages>> GetShowImagesAsync(int showId)
         {
-            return await GetJsonAsync<IList<ShowImages>>($"/shows/{showId}/images")
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<ShowImages>>($"/shows/{showId}/images");
         }
 
         /// <summary>
@@ -386,15 +367,14 @@ namespace MovieCollection.TVMaze
         /// </summary>
         /// <param name="page">The page number.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Show>> GetShowIndexAsync(int page = 1)
+        public Task<IList<Show>> GetShowIndexAsync(int page = 1)
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
                 new KeyValuePair<string, string>("page", page.ToString(CultureInfo.InvariantCulture)),
             };
 
-            return await GetJsonAsync<IList<Show>>("/shows", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Show>>("/shows", parameters);
         }
 
         /// <summary>
@@ -404,7 +384,7 @@ namespace MovieCollection.TVMaze
         /// <param name="episodeId">The episode id.</param>
         /// <param name="embed">The embeddings.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<Episode> GetEpisodeByIdAsync(int episodeId, params string[] embed)
+        public Task<Episode> GetEpisodeByIdAsync(int episodeId, params string[] embed)
         {
             var parameters = new List<KeyValuePair<string, string>>();
 
@@ -413,8 +393,7 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            return await GetJsonAsync<Episode>($"/episodes/{episodeId}", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<Episode>($"/episodes/{episodeId}", parameters);
         }
 
         /// <summary>
@@ -424,7 +403,7 @@ namespace MovieCollection.TVMaze
         /// <param name="personId">The person id.</param>
         /// <param name="embed">The embeddings.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<Person> GetPersonInfoAsync(int personId, params string[] embed)
+        public Task<Person> GetPersonInfoAsync(int personId, params string[] embed)
         {
             var parameters = new List<KeyValuePair<string, string>>();
 
@@ -433,8 +412,7 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            return await GetJsonAsync<Person>($"/people/{personId}", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<Person>($"/people/{personId}", parameters);
         }
 
         /// <summary>
@@ -446,7 +424,7 @@ namespace MovieCollection.TVMaze
         /// <param name="personId">The person id.</param>
         /// <param name="embed">The embeddings.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<CastCredits>> GetCastCreditsAsync(int personId, params string[] embed)
+        public Task<IList<CastCredits>> GetCastCreditsAsync(int personId, params string[] embed)
         {
             var parameters = new List<KeyValuePair<string, string>>();
 
@@ -455,8 +433,7 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            return await GetJsonAsync<IList<CastCredits>>($"/people/{personId}/castcredits", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<CastCredits>>($"/people/{personId}/castcredits", parameters);
         }
 
         /// <summary>
@@ -468,7 +445,7 @@ namespace MovieCollection.TVMaze
         /// <param name="personId">The person id.</param>
         /// <param name="embed">The embeddings.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<CrewCredits>> GetCrewCreditsAsync(int personId, params string[] embed)
+        public Task<IList<CrewCredits>> GetCrewCreditsAsync(int personId, params string[] embed)
         {
             var parameters = new List<KeyValuePair<string, string>>();
 
@@ -477,8 +454,7 @@ namespace MovieCollection.TVMaze
                 AddEmbeddedPrametersToList(embed, parameters);
             }
 
-            return await GetJsonAsync<IList<CrewCredits>>($"/people/{personId}/crewcredits", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<CrewCredits>>($"/people/{personId}/crewcredits", parameters);
         }
 
         /// <summary>
@@ -489,15 +465,14 @@ namespace MovieCollection.TVMaze
         /// </remarks>
         /// <param name="page">The page number.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<IList<Person>> GetPersonIndexAsync(int page = 1)
+        public Task<IList<Person>> GetPersonIndexAsync(int page = 1)
         {
             var parameters = new List<KeyValuePair<string, string>>()
             {
                 new KeyValuePair<string, string>("page", page.ToString(CultureInfo.InvariantCulture)),
             };
 
-            return await GetJsonAsync<IList<Person>>("/people", parameters)
-                .ConfigureAwait(false);
+            return GetJsonAsync<IList<Person>>("/people", parameters);
         }
 
         private static string GetParametersString(IEnumerable<KeyValuePair<string, string>> parameters)

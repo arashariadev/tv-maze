@@ -13,6 +13,10 @@
         <DebugType>embedded</DebugType>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+
     <PropertyGroup>
         <NoWarn>SA1200;NU5105;CA1303;SA1309;SA1101;CS1591;SA1633;CA1055;CA2227</NoWarn>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -32,7 +36,6 @@
     -->
 
     <PropertyGroup>
-        <Version>1.0.0-alpha.11</Version>
         <Authors>Peyman Mohammadi</Authors>
         <PackageId>MovieCollection.TVMaze</PackageId>
         <Copyright>© 2022 Peyman Mohammadi</Copyright>
